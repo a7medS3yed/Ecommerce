@@ -1,0 +1,59 @@
+<section id="login" class="w-75 mx-auto p-5">
+    <h2 class="h4 text-success fw-bolider">Login Now</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" >
+        <div class="my-2">
+            <label for="email">email :</label>
+            <input type="email" class="form-control" id="email" formControlName="email"
+            [ngClass]="{
+                'is-valid':!loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty),
+                'is-invalid':loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
+            }"
+            >
+            @if(loginForm.get('email')?.errors && loginForm.get('email')?.touched){
+                <div class="alert alert-danger">
+                   @if (loginForm.get('email')?.getError('required')) {
+                    <p>Email is required</p>
+                   }
+                   @else if (loginForm.get('email')?.getError('email')) {
+                    <p>Enter valid email</p>
+                   }
+                </div>
+            }
+        </div>
+        <div class="my-2">
+            <label for="password">password :</label>
+            <input type="password" class="form-control" id="password" formControlName="password"
+            [ngClass]="{
+                'is-valid':!loginForm.get('password')?.errors && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty),
+                'is-invalid':loginForm.get('password')?.errors && (loginForm.get('password')?.touched||loginForm.get('password')?.dirty)
+            }">
+           
+                @if(loginForm.get('password')?.errors && loginForm.get('password')?.touched){
+                    <div class="alert alert-danger">
+                    @if (loginForm.get('password')?.getError('required')) {
+                        <p>Password is required</p>
+                    }
+                    @else if (loginForm.get('password')?.getError('pattern')) {
+                        <p>Password should be 8 character long</p>
+                    }
+                </div>
+                }
+           
+        </div>
+        <div class="my-2">
+            <div class="d-flex align-items-center">
+                <a class="link-primary" routerLink="/forget">Forget password?</a>
+                <button [disabled]="loginForm.invalid || isLodding" class="btn-main d-block ms-auto disabled">Login
+                    @if(isLodding){
+                        <span><i class="fas fa-spin fa-spinner"></i></span>
+                    }
+                </button>
+            </div>
+        </div>
+        @if(msgError){
+            <p class="alert alert-danger ">
+                The email or password is not correct
+            </p>
+        }
+    </form>
+</section>

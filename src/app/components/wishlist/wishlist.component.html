@@ -1,0 +1,30 @@
+<section class="shadow m-5 bg-main-light rounded-3 p-5">
+    <div class="container">
+        <h2 class=" fw-bolder mb-5">My Wish List</h2>
+      
+    
+    @for(item of wishList() ; track item._id){
+        <div class="row  mb-2 border-bottom">
+            <div class="col-md-1">
+                <div>
+                    <img [src]="item.imageCover " [alt]="item.slug " class="w-100">
+                </div>
+            </div>
+            <div class="col-md-11 d-flex justify-content-between align-items-center">
+                <div class="mb-2">
+                    <p class="">{{item.slug}}</p>
+                    <p class="text-main">{{item.price }} EGP</p>
+                    <span (click)=" removeItem(item._id) "  class="text-danger cursor-pointer   "><i class="fa-solid fa-trash "></i>Remove</span>
+                </div>
+                <div>
+                    <button (click)="addItemToCart(item._id)" class="btn btn-outline-success curser-pointer">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    }
+   
+      
+    </div>
+
+
+</section>

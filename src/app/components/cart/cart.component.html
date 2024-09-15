@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <section class="bg-main-light m-5 p-3 shadow rounded-3">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h2 text-capitalize">shop cart</h1>
+                <p class="text-main text-capitalize">total cart price : {{cartDetalies.totalCartPrice}} EGP</p>
+            </div>
+            <div>
+                <button class="btn btn-primary text-capitalize" [routerLink]="['/order', cartDetalies._id]">cheack out</button>
+            </div>
+        </div>
+        @for (item of cartDetalies.products; track item.product.id) {
+        <div class="row mb-2 border-bottom">
+            <div class="col-md-1">
+                <div>
+                    <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-100">
+                </div>
+            </div>
+            <div class="col-md-11 d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="h5">{{item.product.title}}</h3>
+                    <p class="text-main">price: {{item.price}} </p>
+                    <span class="text-danger cursor-pointer " (click)="deleteItem(item.product.id)"><i
+                            class="fa-solid fa-trash "></i> Remove</span>
+                </div>
+                <div>
+                    <span class="cursor-pointer s" (click)="updateQuantity(item.product.id, item.count +1)" ><i class="fa-solid fa-plus"></i></span>
+                    <span class="mx-2">{{item.count}}</span>
+                    <span class="cursor-pointer s" (click)="updateQuantity(item.product.id, item.count -1)" ><i class="fa-solid fa-minus"></i></span>
+                </div>
+            </div>
+        </div>
+        }
+        <button (click)="clearCart()" class="btn btn-outline-danger text-capitalize mx-auto my-3  fs-6 d-block"><i
+            class="fa-solid fa-trash "></i> clear your cart</button>
+
+
+    </section>
+
+</div>

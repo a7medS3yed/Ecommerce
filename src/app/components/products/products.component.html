@@ -1,0 +1,41 @@
+<div class="container">
+     <!-- products -->
+     <section id="home">
+
+        <input [(ngModel)]="textSearch" type="search" class="form-control my-4 w-50 mx-auto" placeholder="Search by name here.....">
+        <div class="row g-3 m-3">
+            @for (product of productsList() | search : textSearch  ; track product.id) {
+            <div class="col-md-2">
+                <div class="product p-2">
+                   <div [routerLink]="['/detalies', product.id]" >
+                        <img [src]="product.imageCover" alt="product" class="w-100">
+                        
+                            <div>
+                                <h2 class="small text-main">{{product.category.name}}</h2>
+                                <h3 class="h6 fw-bolder">{{product.title.split(" ",2).join(" ")}}</h3>
+                            </div>
+                           
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>{{product.price}} EGP</span>
+                            <div>
+                                <span><i class="fas fa-star rating-color"></i></span>
+                                <span class="text-muted">{{product.ratingsAverage}}</span>
+                            </div>
+                        </div>
+                   </div>
+                   <div>
+                    <span (click)="addItemToWish(product.id)" class="cursor-pointer">
+                        <i class="fa-solid fa-heart fa-xl"
+                        [ngClass]="{ 'text-danger': isInWishlist(product.id) }"
+                         style="color: #000000;"></i> <!-- 'text-danger' makes it red -->
+                    </span>
+                </div>
+                    <button class="btn-main w-100 my-1  " (click)="addItemToCart(product.id)">Add to cart</button>
+                </div>
+            </div>
+            }
+        </div>
+
+    </section>
+</div>

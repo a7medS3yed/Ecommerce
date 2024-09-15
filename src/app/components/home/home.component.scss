@@ -1,0 +1,8 @@
+.product button{
+    transform: translateY(130%);
+    transition: transform 0.8s;
+}
+
+.product:hover button{
+    transform: translateY(0);
+}

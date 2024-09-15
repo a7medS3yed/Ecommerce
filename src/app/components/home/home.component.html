@@ -1,0 +1,93 @@
+<div class="container-fluid">
+
+    <!-- slider main -->
+    <section class="my-5 mx-4">
+
+       
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div>
+                        <owl-carousel-o [options]="customOptionsMain">
+                            <ng-template carouselSlide><img src="./assets/images/slider-image-1.jpeg" alt=""
+                                    class="w-100" height="500px"></ng-template>
+                            <ng-template carouselSlide><img src="./assets/images/slider-image-2.jpeg" alt=""
+                                    class="w-100" height="500px"></ng-template>
+                            <ng-template carouselSlide><img src="./assets/images/slider-image-3.jpeg" alt=""
+                                    class="w-100" height="500px"></ng-template>
+                        </owl-carousel-o>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <img src="./assets/images/slider-image-2.jpeg" alt="" class="w-100" height="250px">
+                        <img src="./assets/images/slider-image-3.jpeg" alt="" class="w-100" height="250px">
+                    </div>
+                </div>
+            </div>
+        
+
+    </section>
+
+    <!-- catgories -->
+    <section id="catgory" class="my-5 mx-4">
+        <h2 class="h4">Shop Popular Categories</h2>
+        <owl-carousel-o [options]="customOptions">
+
+            @for (cat of categoriesList; track cat._id) {
+            <ng-template carouselSlide [id]=" cat._id">
+
+                <div class="py-2">
+                    <img [src]="cat.image" [alt]="cat.name" class="w-100" height="250px">
+                    <h3 class="h6 mt-2">{{ cat.name }}</h3>
+                </div>
+
+            </ng-template>
+            }
+
+        </owl-carousel-o>
+    </section>
+
+    <!-- products -->
+    <section id="home">
+
+        <input [(ngModel)]="textSearch" type="search" class="form-control my-4 w-50 mx-auto" placeholder="Search by name here.....">
+        <div class="row g-3 m-3">
+            @for (product of productsList.slice(0,12) | search : textSearch ; track product.id) {
+              <div class="col-md-2">
+                <div class="product p-2">
+                  <div [routerLink]="['/detalies', product.id]">
+                    <img [src]="product.imageCover" alt="product" class="w-100">
+          
+                    <div>
+                      <h2 class="small text-main">{{ product.category.name }}</h2>
+                      <h3 class="h6 fw-bolder">{{ product.title.split(" ",2).join(" ") }}</h3>
+                    </div>
+          
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span>{{ product.price }} EGP</span>
+                      <div>
+                        <span><i class="fas fa-star rating-color"></i></span>
+                        <span class="text-muted">{{ product.ratingsAverage }}</span>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <!-- Heart icon with dynamic color change based on wishlist state -->
+                  <div>
+                   
+                    <span (click)="addItemToWish(product.id)" class="cursor-pointer">
+                        <i class="fa-solid fa-heart fa-xl"
+                        [ngClass]="{ 'text-danger': isInWishlist(product.id) }"
+                         style="color: #000000;"></i> <!-- 'text-danger' makes it red -->
+                    </span>
+                  </div>
+          
+                  <button class="btn-main w-100 my-1" (click)="addItemToCart(product.id)">Add to cart</button>
+                </div>
+              </div>
+            }
+          </div>
+          
+
+    </section>
+</div>

@@ -1,0 +1,35 @@
+@if(detaliesList){
+    <div class="container my-5">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <div>
+                    <owl-carousel-o [options]="customOptionsDetalies">
+
+                        @for (item of detaliesList.images; track $index) {
+                            <ng-template carouselSlide>
+                            <img [src]="item" [alt]="detaliesList.category.name" class="w-100">
+                            </ng-template>
+                        }
+                    
+                      </owl-carousel-o>
+                    
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div>
+                    <h2>{{detaliesList.title}}</h2>
+                    <p class="text-muted"> {{detaliesList.description}} </p>
+                    <h2 class="small text-success">{{detaliesList.category.name}}</h2>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>{{detaliesList.price}} EGP</span>
+                        <div>
+                            <span><i class="fas fa-star rating-color"></i></span>
+                            <span class="text-muted">{{detaliesList.ratingsAverage}}</span>
+                        </div>
+                    </div>
+                    <button class="btn-main w-100 my-1" (click)="addItemToCart(detaliesList.id )"> + Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

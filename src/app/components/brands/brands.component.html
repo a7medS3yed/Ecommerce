@@ -1,0 +1,16 @@
+<div class="container">
+    <section class="m-5">
+        <div class="row g-3">
+           @for(item of brandsList(); track item._id){
+            <div class="col-md-4">
+                <div class="product p-2">
+                    <img [src]=" item.image" class="w-100" [alt]=" item.name ">
+                    <h2 class="h4 text-center text-main">
+                        {{item.name}}
+                    </h2>
+                </div>
+            </div>
+           }
+        </div>
+    </section>
+</div>
